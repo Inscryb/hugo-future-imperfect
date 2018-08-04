@@ -80,7 +80,7 @@
     <section id="categories">
       <header>
         <h3>
-          <a href="/categories/">Categories</a>
+          <a href="{{ "categories/" | relLangURL }}">Categories</a>
         </h3>
       </header>
         {{ if .Site.Params.categoriesByCount }}
@@ -90,11 +90,10 @@
         {{ end }}
 
         {{ range $key, $value := $.Scratch.Get "categories" }}
-        <p>
           <article>
             <header>
               {{ if ne $value.Name "" }}
-                <a href="/categories/{{ $value.Name | urlize }}/">{{ $value.Name }}</a>
+                <a href="{{ (add "categories/" ($value.Name | urlize)) | relLangURL }}">{{ $value.Name }}</a>
                 <span style="float:right;">{{ $value.Count }}</span>
               {{ else }}
                 Uncategorized
@@ -102,7 +101,6 @@
               {{ end }}
             </header>
           </article>
-        </p>
         {{ end }}
     </section>
   {{ end }}
@@ -113,7 +111,11 @@
     <section id="mini-bio">
       <h3>About</h3>
       <p>{{ . | safeHTML }}</p>
-      <a href="/about/" class="button">Learn More</a>
+
+      {{ if false -}}
+      <a href="{{ "about/" | relLangURL }}" class="button">Learn More</a>
+      {{- end }}
+
     </section>
   {{ end }}
 
